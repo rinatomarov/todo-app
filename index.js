@@ -92,7 +92,7 @@ async function getToDoS() {
     // const overlay = document.querySelector('.overlay')
     overlay.style.display = 'block'
     try {
-        const response = await axios.get('http://localhost:3000/todos')
+        const response = await axios.get('https://humane-cookie-flock.glitch.me/todos')
         todos = response
         console.log(response.data)
         for (let id = 0; id < response.data.length; id++) {
@@ -133,7 +133,7 @@ buttonCreateTask.addEventListener('click', async () => {
             // console.log(spinner)
             // console.log(overlay)
             await sleep(60)
-            await axios.post('http://localhost:3000/todos', {
+            await axios.post('https://humane-cookie-flock.glitch.me/todos', {
                 id: `${idTask}`,
                 // idTask,
                 title: dataText,
