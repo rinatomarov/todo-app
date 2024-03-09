@@ -72,7 +72,7 @@ function addElements(statusTask, title, id) {
                         title: inputElement.value,
                         status: statusTask
                     })
-                    await sleep(50)
+                    // await sleep(50)
                 } catch (error) {
                     console.log('Error:', error)
                 } finally {
@@ -91,6 +91,9 @@ async function getToDoS() {
     spinner.style.display = 'block'
     // const overlay = document.querySelector('.overlay')
     overlay.style.display = 'block'
+    document.querySelectorAll('.todo-items').forEach(todo => {
+        todo.innerHTML = ''
+    })
     try {
         const response = await axios.get('https://humane-cookie-flock.glitch.me/todos')
         todos = response
@@ -101,7 +104,7 @@ async function getToDoS() {
             let title = response.data[id].title
             // console.log(statusTask, title)
             addElements(statusTask, title, response.data[id].id)
-            await sleep(50)
+            // await sleep(50)
 
             // console.log(status[0])
         }
@@ -132,14 +135,15 @@ buttonCreateTask.addEventListener('click', async () => {
             overlay.style.display = 'block'
             // console.log(spinner)
             // console.log(overlay)
-            await sleep(60)
+            // await sleep(60)
             await axios.post('https://humane-cookie-flock.glitch.me/todos', {
-                id: `${idTask}`,
+                // id: `${idTask}`,
                 // idTask,
                 title: dataText,
                 status: status
             })
-            addElements(status, dataText, idTask)
+            await getToDoS()
+            // addElements(status, dataText, idTask)
         }
 
         if (radioDataActive) {
@@ -186,11 +190,12 @@ $(function () {
                 } else {
                     console.error(`Task with id ${todoId} not found.`)
                 }
-                await sleep(400)
+                // await sleep(30)
                 await axios.put(`https://humane-cookie-flock.glitch.me/todos/${todoId}`, {
                     status: taskToUpdate.status,
                     title: data.item[0].firstChild.innerText
                 })
+                container.toElement.parentNode.dataset.status = taskToUpdate.status
             } catch (error) {
                 console.log('Error:', error)
             } finally {
