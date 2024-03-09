@@ -46,7 +46,7 @@ function addElements(statusTask, title, id) {
     // console.log(todoItems)
 
     buttonTrash.addEventListener('click', async () => {
-        await axios.delete(`http://localhost:3000/todos/${id}`)
+        await axios.delete(`https://humane-cookie-flock.glitch.me/todos/${id}`)
             .then(response => {
                 console.log(`Deleted post with ID ${id}`);
             })
@@ -67,7 +67,7 @@ function addElements(statusTask, title, id) {
                     taskName.textContent = inputElement.value;
                     inputElement.parentNode.replaceChild(taskName, inputElement);
                     // console.log(inputElement)
-                    await axios.put(`http://localhost:3000/todos/${id}`, {
+                    await axios.put(`https://humane-cookie-flock.glitch.me/todos/${id}`, {
                         id: id,
                         title: inputElement.value,
                         status: statusTask
@@ -187,7 +187,7 @@ $(function () {
                     console.error(`Task with id ${todoId} not found.`)
                 }
                 await sleep(400)
-                await axios.put(`http://localhost:3000/todos/${todoId}`, {
+                await axios.put(`https://humane-cookie-flock.glitch.me/todos/${todoId}`, {
                     status: taskToUpdate.status,
                     title: data.item[0].firstChild.innerText
                 })
@@ -201,4 +201,4 @@ $(function () {
     }).disableSelection();
 })
 
-// await axios.put(`http://localhost:3000/todos/${todoId}`
+// await axios.put(`https://humane-cookie-flock.glitch.me/todos/${todoId}`
